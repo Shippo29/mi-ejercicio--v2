@@ -1,0 +1,39 @@
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+}
+.offer-item {
+  background: transparent;
+  padding: 6px;
+}
+/* permitir que cada item estire su contenido para igualar altura de tarjetas */
+.offer-item {
+  display: flex;
+  align-items: stretch;
+}
+.offer-item .card {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.offers-promo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #071018, #0b1220);
+  padding: 18px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  color: #e6eef8;
+}
+.offers-promo img {
+  max-width: 160px;
+  border-radius: 8px;
+}
+.offers-promo-left h2 {
+  color: #00ff99;
+  margin: 0 0 6px 0;
+}

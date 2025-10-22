@@ -1,0 +1,56 @@
+.contact .about p {
+  color: #dbeafe;
+}
+.contact .misvis h4 {
+  margin-top: 12px;
+}
+.whatsapp select {
+  padding: 8px;
+  border-radius: 6px;
+  background: #0b0b0d;
+  color: #e6eef8;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* Animaciones y estilo neon */
+.contact-animated {
+  background: linear-gradient(180deg, #05060a, #071018);
+  padding: 18px;
+  border-radius: 10px;
+}
+.contact .info ul li {
+  margin-bottom: 8px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.contact .info ul li:before {
+  content: "•";
+  color: #00ff99;
+  font-weight: 900;
+  margin-right: 6px;
+  transform: scale(1.2);
+}
+.whatsapp-cta {
+  background: linear-gradient(90deg, #00cc7a, #00ff99);
+  border: none;
+  color: #081018;
+  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(0, 255, 153, 0.12);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.whatsapp-cta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 46px rgba(0, 255, 153, 0.18);
+}
+.contact .misvis,
+.contact .about,
+.contact .info {
+  transition: transform 260ms ease, opacity 260ms ease;
+}
+.contact .misvis:hover,
+.contact .about:hover,
+.contact .info:hover {
+  transform: translateY(-6px);
+  opacity: 0.98;
+}

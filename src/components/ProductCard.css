@@ -1,0 +1,57 @@
+.card {
+  background: linear-gradient(180deg, #0b0b0d 0%, #0f0f12 100%);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative; /* para referencias absolutas dentro de la card */
+}
+.card-img {
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+}
+/* asegurar que todas las tarjetas tengan altura consistente */
+.card {
+  min-height: 340px; /* altura total estimada para mantener uniformidad */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card-body {
+  padding: 12px;
+  padding-bottom: 56px; /* espacio para badges / botones flotantes */
+}
+.card-body h3 {
+  margin: 4px 0;
+  color: #dbeafe;
+}
+.price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.price-old {
+  color: #c7c7c7;
+  text-decoration: line-through;
+  font-weight: 600;
+}
+.price-new {
+  color: #00ff99;
+  font-weight: 800;
+}
+.desc {
+  color: #9aa7c7;
+  font-size: 13px;
+}
+.add-btn {
+  margin-top: 8px;
+  background: linear-gradient(90deg, #00ff99, #00c2ff);
+  border: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+  color: #061018;
+  cursor: pointer;
+  font-weight: 700;
+}

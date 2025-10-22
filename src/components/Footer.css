@@ -1,0 +1,64 @@
+:root {
+  --footer-z: 1030;
+}
+
+.site-footer {
+  width: 100%;
+  background-color: #070708; /* igual que el fondo principal */
+  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.03);
+  z-index: var(--footer-z);
+}
+
+/* Asegura que los enlaces sean visibles y tengan foco accesible */
+.site-footer a {
+  color: #9fd7ff; /* color claro con contraste en fondo oscuro */
+  text-decoration: none;
+}
+
+.site-footer a:focus,
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+/* fecha con negrita y color consistente */
+.footer-date {
+  color: #e6eef8;
+  font-weight: 700;
+}
+
+/* lista de contacto con viñetas y espaciado */
+.footer-left ul {
+  list-style: disc inside;
+  padding-left: 0.75rem;
+  margin: 0.35rem 0 0 0;
+}
+.footer-left li {
+  color: #e6eef8;
+  margin: 0.25rem 0;
+}
+
+.footer-right {
+  color: #e6eef8;
+}
+
+/* Asegura que el bloque derecho se pegue a la derecha en layout flex */
+.footer-right {
+  margin-left: auto; /* empuja a la derecha si hay espacio disponible */
+}
+
+/* En móviles (cuando se apila) centramos el contenido */
+@media (max-width: 575.98px) {
+  .footer-right {
+    margin-left: 0;
+    text-align: center;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}
+
+/* En pantallas muy pequeñas apilar y centrar */
+@media (max-width: 575.98px) {
+  .site-footer .footer-inner {
+    text-align: center;
+  }
+}

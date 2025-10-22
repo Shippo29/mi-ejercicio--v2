@@ -1,0 +1,222 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 28px;
+  background: linear-gradient(90deg, #0f0f11 0%, #121217 60%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+.brand {
+  color: #00ff99;
+  margin: 0;
+  letter-spacing: 1px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 18px;
+  margin: 0 12px 0 0;
+  padding: 0;
+  color: #c7d2ff;
+}
+.nav-links li {
+  cursor: pointer;
+}
+.cart-btn {
+  background: #16161a;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.navbar-logo {
+  height: 84px; /* ligeramente más grande pero proporcional */
+  width: auto; /* mantener proporciones */
+  margin-right: 20px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Estilos mejorados para los enlaces del menú */
+.nav-links a {
+  display: inline-block;
+  text-decoration: none;
+  color: #c7d2ff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: all 180ms ease-in-out;
+  font-weight: 600;
+  background: transparent;
+}
+.nav-links a:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 153, 0.08),
+    rgba(99, 102, 241, 0.06)
+  );
+  color: #00ff99;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.25);
+}
+
+/* Botón carrito más atractivo */
+.cart-btn {
+  background: linear-gradient(90deg, #00cc7a, #00ff99);
+  color: #081018;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(0, 204, 122, 0.18);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.cart-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(0, 204, 122, 0.22);
+}
+
+/* Layout adicional para la nueva estructura */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand-wrap .brand-sub {
+  display: block;
+  font-size: 12px;
+  color: rgba(199, 210, 255, 0.7);
+}
+.nav-center {
+  flex: 1 1 480px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+}
+.search-form {
+  display: flex;
+  width: 60%;
+  max-width: 640px;
+  background: #0b0b0d;
+  border-radius: 999px;
+  padding: 6px;
+  align-items: center;
+  box-shadow: 0 6px 20px rgba(2, 6, 23, 0.45);
+}
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: #e6eef8;
+  padding: 8px 12px;
+  outline: none;
+}
+.search-btn {
+  background: linear-gradient(90deg, #00cc7a, #00ff99);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 999px;
+  margin-right: 6px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.location {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 12px;
+  color: #c7d2ff;
+}
+.location-select {
+  display: flex;
+  align-items: center;
+}
+.location-btn {
+  background: rgba(255, 255, 255, 0.02);
+  color: #e6eef8;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 140px;
+  justify-content: space-between;
+}
+.location-btn:hover {
+  border-color: rgba(0, 255, 153, 0.12);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+.chev {
+  opacity: 0.7;
+  margin-left: 8px;
+}
+
+.regions-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: #c7d2ff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.regions-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+}
+.regions-dialog {
+  background: linear-gradient(180deg, #071018, #0b1220);
+  padding: 18px;
+  border-radius: 10px;
+  color: #e6eef8;
+  max-width: 480px;
+  width: 90%;
+}
+.regions-dialog .close {
+  background: transparent;
+  border: none;
+  color: #c7d2ff;
+  float: right;
+  font-size: 18px;
+}
+.regions-dialog ul {
+  columns: 1;
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+}
+.regions-dialog li {
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  background: rgba(255, 255, 255, 0.01);
+  cursor: pointer;
+}
+.regions-dialog li:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 153, 0.04),
+    rgba(99, 102, 241, 0.02)
+  );
+  color: #00ff99;
+}
+
+@media (max-width: 900px) {
+  .nav-center {
+    display: none;
+  }
+  .navbar-logo {
+    height: 64px;
+  }
+}

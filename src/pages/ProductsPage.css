@@ -1,0 +1,32 @@
+.products-page .filters {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 12px 0;
+}
+.products-page input,
+.products-page select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #0b0b0e;
+  color: #e6eef8;
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+.prod-wrapper {
+  cursor: pointer;
+}
+.prod-wrapper {
+  display: flex;
+  align-items: stretch;
+}
+.prod-wrapper .card {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

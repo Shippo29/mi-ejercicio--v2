@@ -1,0 +1,88 @@
+.home .promo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #0b1220, #0f1724);
+  padding: 22px;
+  border-radius: 12px;
+  color: #fff;
+  margin: 18px 0;
+}
+.home .promo-left h2 {
+  font-size: 28px;
+  margin: 0;
+  color: #00ff99;
+}
+.home .promo-left p {
+  margin: 6px 0 4px;
+}
+.home .promo-right img {
+  max-width: 220px;
+  border-radius: 8px;
+}
+
+/* nueva sección de ofertas dentro del home */
+.home-offers {
+  margin-top: 20px;
+}
+.home-offers .offers-grid {
+  display: grid;
+  /* usar la misma base que la página de productos para consistencia visual */
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+}
+.home .promo-right img {
+  transition: transform 260ms ease, box-shadow 260ms ease;
+}
+.home .promo-right img:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 255, 153, 0.12);
+}
+.featured {
+  margin-top: 18px;
+}
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+}
+.featured-item .card {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.featured-item {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+.badges {
+  display: flex;
+  gap: 8px;
+  /* posicionar badges sin alterar el flujo para mantener altura uniforme */
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+}
+.discount {
+  background: #ff4d4f;
+  color: #fff;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+.fast {
+  background: #e6fdf3;
+  color: #026a4f;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+.payments {
+  margin-top: 18px;
+  padding: 12px;
+  background: #071018;
+  border-radius: 8px;
+  color: #c7d2ff;
+}
