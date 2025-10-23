@@ -81,8 +81,27 @@
 }
 .payments {
   margin-top: 18px;
-  padding: 12px;
-  background: #071018;
-  border-radius: 8px;
-  color: #c7d2ff;
+  padding: 20px;
+  background: linear-gradient(135deg, #071018, #0d1c2a);
+  border-radius: 12px;
+  color: #e6eef8;
+  box-shadow: 0 4px 15px rgba(0, 255, 153, 0.1);
+  border: 1px solid rgba(0, 255, 153, 0.1);
+  transition: all 0.3s ease;
+}
+
+.payments:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 153, 0.15);
+}
+
+.payments h4 {
+  color: #00ff99;
+  font-size: 1.3em;
+  margin-bottom: 10px;
+}
+
+.payments p {
+  line-height: 1.5;
+  font-size: 1.1em;
 }

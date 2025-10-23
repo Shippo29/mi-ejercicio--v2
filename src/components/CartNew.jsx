@@ -17,6 +17,8 @@ export default function CartNew() {
 
   const [couponInput, setCouponInput] = useState("");
   const [couponMessage, setCouponMessage] = useState(null);
+  const [bumpedId, setBumpedId] = useState(null);
+  const [shipping, setShipping] = useState({ direccion: "", comuna: "" });
 
   // Ocultar producto de prueba id=101 del listado
   const visible = (carrito || []).filter((p) => p && p.id !== 101);
@@ -89,7 +91,10 @@ export default function CartNew() {
 
           <div className="cart-table">
             {visible.map((item) => (
-              <div key={item.id} className="cart-row d-flex align-items-center">
+              <div
+                key={item.id}
+                className={`cart-row d-flex align-items-center enter`}
+              >
                 <div style={{ width: 90 }}>
                   <img
                     src={item.imagen}
@@ -129,14 +134,27 @@ export default function CartNew() {
                   <div className="qty-controls">
                     <button
                       className="btn-neon"
-                      onClick={() => decrementar(item.id)}
+                      onClick={() => {
+                        decrementar(item.id);
+                        setBumpedId(item.id);
+                      }}
+                      aria-label={`Disminuir cantidad de ${item.nombre}`}
                     >
                       -
                     </button>
-                    <span style={{ margin: "0 12px" }}>{item.cantidad}</span>
+                    <span
+                      className={bumpedId === item.id ? "qty-bump" : ""}
+                      style={{ margin: "0 12px" }}
+                    >
+                      {item.cantidad}
+                    </span>
                     <button
                       className="btn-neon"
-                      onClick={() => incrementar(item.id)}
+                      onClick={() => {
+                        incrementar(item.id);
+                        setBumpedId(item.id);
+                      }}
+                      aria-label={`Aumentar cantidad de ${item.nombre}`}
                     >
                       +
                     </button>
@@ -197,7 +215,39 @@ export default function CartNew() {
               <small style={{ color: "#7ef0b4" }}>(Descuento aplicado)</small>
             )}
           </h4>
-          <button className="finalize-btn" onClick={finalizarCompra}>
+
+          <div style={{ marginTop: 10, marginBottom: 8 }}>
+            <strong>Dirección de envío</strong>
+            <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
+              <input
+                className="form-control"
+                placeholder="Dirección"
+                value={shipping.direccion}
+                onChange={(e) =>
+                  setShipping((s) => ({ ...s, direccion: e.target.value }))
+                }
+              />
+              <input
+                className="form-control"
+                placeholder="Comuna"
+                value={shipping.comuna}
+                onChange={(e) =>
+                  setShipping((s) => ({ ...s, comuna: e.target.value }))
+                }
+              />
+            </div>
+          </div>
+
+          <button
+            className="finalize-btn"
+            onClick={() => finalizarCompra(shipping)}
+            disabled={!shipping.direccion || !shipping.comuna}
+            title={
+              !shipping.direccion || !shipping.comuna
+                ? "Completa dirección y comuna antes de finalizar"
+                : "Finalizar compra"
+            }
+          >
             Finalizar compra
           </button>
         </div>

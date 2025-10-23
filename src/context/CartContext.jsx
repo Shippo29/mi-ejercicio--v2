@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const CartContext = createContext();
 
@@ -28,7 +29,6 @@ export function CartProvider({ children }) {
   useEffect(() => {
     localStorage.setItem("carrito", JSON.stringify(carrito));
     if (window.animateCartBadge) window.animateCartBadge();
-    // dispatch event for external listeners
     document.dispatchEvent(
       new CustomEvent("cartChanged", {
         detail: { count: carrito.reduce((a, b) => a + b.cantidad, 0) },
@@ -61,8 +61,15 @@ export function CartProvider({ children }) {
         },
       ];
     });
-    if (window.showToast)
-      window.showToast(`${p.nombre} agregado al carrito 🛒`);
+    toast.success(`¡${p.nombre} agregado al carrito! 🛒`, {
+      style: {
+        background: "linear-gradient(135deg, #071018, #0d1c2a)",
+        color: "#e6eef8",
+        boxShadow: "0 4px 15px rgba(0, 255, 153, 0.2)",
+        border: "1px solid rgba(0, 255, 153, 0.1)",
+        borderLeft: "4px solid #00ff99",
+      },
+    });
   }
 
   function eliminarDelCarrito(id) {
@@ -104,10 +111,17 @@ export function CartProvider({ children }) {
     return carrito;
   }
 
-  function finalizarCompra() {
+  function finalizarCompra(shipping) {
     if (carrito.length === 0) {
-      if (window.showToast) return window.showToast("Carrito vacío");
-      alert("Carrito vacío");
+      toast.warning("El carrito está vacío", {
+        style: {
+          background: "linear-gradient(135deg, #071018, #0d1c2a)",
+          color: "#e6eef8",
+          boxShadow: "0 4px 15px rgba(255, 193, 7, 0.2)",
+          border: "1px solid rgba(255, 193, 7, 0.1)",
+          borderLeft: "4px solid #ffc107",
+        },
+      });
       return;
     }
     const currentUser = window.getCurrentUser ? window.getCurrentUser() : null;
@@ -122,7 +136,6 @@ export function CartProvider({ children }) {
     carrito.forEach((item) => {
       const baseDiscount = item.descuento || userDiscount || 0;
       let extraDiscount = 0;
-      // Extra discount can come from applied coupon (activeCoupon) or user referralCode if no coupon
       const couponToCheck = activeCoupon
         ? activeCoupon
         : currentUser && currentUser.referralCode
@@ -139,7 +152,6 @@ export function CartProvider({ children }) {
       total += price * item.cantidad;
     });
     const points = Math.floor(total / 1000);
-    // use CLP formatter for messages
     const { formatCLP } = require("../utils/format");
     if (currentUser) {
       if (window.addPointsToUser)
@@ -147,14 +159,28 @@ export function CartProvider({ children }) {
       const msg = `Compra finalizada. Total: ${formatCLP(total)}. Has ganado ${
         points + 10
       } puntos.`;
-      if (window.showToast) window.showToast(msg);
-      else alert(msg);
+      toast.success(msg, {
+        style: {
+          background: "linear-gradient(135deg, #071018, #0d1c2a)",
+          color: "#e6eef8",
+          boxShadow: "0 4px 15px rgba(0, 255, 153, 0.2)",
+          border: "1px solid rgba(0, 255, 153, 0.1)",
+          borderLeft: "4px solid #00ff99",
+        },
+      });
     } else {
       const msg = `Compra finalizada. Total: ${formatCLP(
         total
       )}. Inicia sesión para acumular puntos.`;
-      if (window.showToast) window.showToast(msg);
-      else alert(msg);
+      toast.success(msg, {
+        style: {
+          background: "linear-gradient(135deg, #071018, #0d1c2a)",
+          color: "#e6eef8",
+          boxShadow: "0 4px 15px rgba(0, 255, 153, 0.2)",
+          border: "1px solid rgba(0, 255, 153, 0.1)",
+          borderLeft: "4px solid #00ff99",
+        },
+      });
     }
     const orders = JSON.parse(localStorage.getItem("orders") || "[]");
     orders.push({
@@ -163,17 +189,16 @@ export function CartProvider({ children }) {
       total,
       userId: currentUser ? currentUser.id : null,
       date: new Date().toISOString(),
+      shipping: shipping || null,
     });
     localStorage.setItem("orders", JSON.stringify(orders));
     setCarrito([]);
-    // clear coupon after purchase
     setActiveCoupon(null);
   }
 
   function applyCoupon(code) {
     if (!code) return { success: false, message: "Ingrese un código" };
     const c = String(code).trim().toLowerCase();
-    // Only support DUOC for now
     if (c !== "duoc") return { success: false, message: "Código inválido" };
     const hasExclusiveDiscount = carrito.some(
       (it) => it.descuento && it.descuento > 0

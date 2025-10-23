@@ -1,4 +1,4 @@
-const ADMIN_EMAILS = ["ag.llanten@duocuc.cl", "cr.brionesj@duocuc.cl"];
+const ADMIN_EMAILS = ["ag.llanten@duocuc.cl", "cr.brionesj@duocuc.cl","gin.trujillo@duocuc.cl"];
 
 export function getUsers() {
   try {
@@ -12,7 +12,6 @@ export function saveUsers(users) {
   localStorage.setItem("users", JSON.stringify(users));
 }
 
-// migration: give duoc emails a discount if missing
 (function () {
   try {
     const users = getUsers();
@@ -145,15 +144,53 @@ export function populateProfileForm() {
   if (puntos) puntos.value = user.points || 0;
   if (referral) referral.value = user.referralCode || "";
   const copyBtn = document.getElementById("copyReferralBtn");
-  if (copyBtn && referral)
-    copyBtn.onclick = () => {
-      navigator.clipboard && referral.value
-        ? navigator.clipboard.writeText(referral.value).then(() => {
-            if (window.showToast) showToast("Copiado");
-            else alert("Copiado");
-          })
-        : null;
+  if (copyBtn && referral) {
+    copyBtn.onclick = async () => {
+      const text = (referral.value || "").trim();
+      if (!text) {
+        if (typeof window.showToast === "function")
+          window.showToast("No hay código para copiar");
+        else alert("No hay código para copiar");
+        return;
+      }
+      try {
+        if (
+          navigator.clipboard &&
+          typeof navigator.clipboard.writeText === "function"
+        ) {
+          await navigator.clipboard.writeText(text);
+          if (typeof window.showToast === "function")
+            window.showToast("Copiado");
+          else alert("Copiado");
+          return;
+        }
+      } catch (e) {
+      }
+      try {
+        const tmp = document.createElement("input");
+        tmp.style.position = "absolute";
+        tmp.style.left = "-10000px";
+        tmp.value = text;
+        document.body.appendChild(tmp);
+        tmp.select();
+        const ok = document.execCommand("copy");
+        document.body.removeChild(tmp);
+        if (ok) {
+          if (typeof window.showToast === "function")
+            window.showToast("Copiado");
+          else alert("Copiado");
+        } else {
+          if (typeof window.showToast === "function")
+            window.showToast("No se pudo copiar");
+          else alert("No se pudo copiar");
+        }
+      } catch (e) {
+        if (typeof window.showToast === "function")
+          window.showToast("Error copiando al portapapeles");
+        else alert("Error copiando al portapapeles");
+      }
     };
+  }
 }
 
 export function updateUserProfileFromForm() {
@@ -183,12 +220,14 @@ export function updateUserProfileFromForm() {
     : "";
 
   if (!nombre || !correo) {
-    if (window.showToast) showToast("Nombre y correo son obligatorios");
+    if (typeof window.showToast === "function")
+      window.showToast("Nombre y correo son obligatorios");
     else alert("Nombre y correo son obligatorios");
     return;
   }
   if (run && !validateRUN(run)) {
-    if (window.showToast) showToast("Formato RUN inválido (ej: 12345678-9)");
+    if (typeof window.showToast === "function")
+      window.showToast("Formato RUN inválido (ej: 12345678-9)");
     else alert("Formato RUN inválido (ej: 12345678-9)");
     return;
   }
@@ -197,7 +236,8 @@ export function updateUserProfileFromForm() {
     const diff = Date.now() - nacimiento.getTime();
     const edad = Math.floor(diff / (365.25 * 24 * 60 * 60 * 1000));
     if (edad < 18) {
-      if (window.showToast) showToast("Debes ser mayor de 18 años");
+      if (typeof window.showToast === "function")
+        window.showToast("Debes ser mayor de 18 años");
       else alert("Debes ser mayor de 18 años");
       return;
     }
@@ -206,8 +246,8 @@ export function updateUserProfileFromForm() {
   const users = getUsers();
   const conflict = users.find((u) => u.correo === correo && u.id !== user.id);
   if (conflict) {
-    if (window.showToast)
-      showToast("El correo ya está en uso por otro usuario");
+    if (typeof window.showToast === "function")
+      window.showToast("El correo ya está en uso por otro usuario");
     else alert("El correo ya está en uso por otro usuario");
     return;
   }
@@ -215,13 +255,15 @@ export function updateUserProfileFromForm() {
   if (newPwd || confirmPwd || currentPwd) {
     if (user.password) {
       if (!currentPwd || currentPwd !== user.password) {
-        if (window.showToast) showToast("Contraseña actual incorrecta");
+        if (typeof window.showToast === "function")
+          window.showToast("Contraseña actual incorrecta");
         else alert("Contraseña actual incorrecta");
         return;
       }
     }
     if (newPwd !== confirmPwd) {
-      if (window.showToast) showToast("Las nuevas contraseñas no coinciden");
+      if (typeof window.showToast === "function")
+        window.showToast("Las nuevas contraseñas no coinciden");
       else alert("Las nuevas contraseñas no coinciden");
       return;
     }
@@ -253,8 +295,8 @@ export function updateUserProfileFromForm() {
     saveUsers(users);
   }
   setCurrentUser(updated);
-  if (window.showToast) showToast
-  ("Perfil actualizado");
+  if (typeof window.showToast === "function")
+    window.showToast("Perfil actualizado");
   else alert("Perfil actualizado");
 }
 
@@ -338,7 +380,6 @@ export function renderProfileGamification(containerId) {
     .join("")}\n      </div>\n    </div>\n  `;
 }
 
-// expose functions for legacy scripts
 window.getUsers = getUsers;
 window.saveUsers = saveUsers;
 window.getCurrentUser = getCurrentUser;

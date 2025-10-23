@@ -1,0 +1,71 @@
+/* Login page styles matching the app palette (dark background, cyan accents) */
+.login-page {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+}
+.login-card {
+  background: #0b0b0e;
+  color: #e6eef8;
+  padding: 24px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+.login-title {
+  margin: 0 0 12px 0;
+  color: #bfffdc;
+}
+.login-form label,
+.register-form label {
+  display: block;
+  margin-top: 8px;
+  color: #9fb6d8;
+}
+.login-form input,
+.register-form input {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid #162029;
+  background: #071018;
+  color: #e6eef8;
+}
+.login-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+.btn {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+.btn.primary {
+  /* Ajuste para armonizar con la paleta principal */
+  background: linear-gradient(90deg, #8fe9ff, #60d4ff);
+  color: #041018;
+}
+.btn.admin {
+  background: linear-gradient(90deg, #ffb74d, #ff9800);
+  color: #051018;
+}
+.btn.link {
+  background: transparent;
+  color: #64efff;
+  text-decoration: underline;
+}
+.login-links {
+  margin-top: 12px;
+}
+.link {
+  background: none;
+  border: none;
+  color: #64efff;
+  text-decoration: underline;
+  cursor: pointer;
+}

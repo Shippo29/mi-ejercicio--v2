@@ -2,7 +2,8 @@
   width: 56px;
   height: 56px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 8px;
+  transition: transform 240ms ease, box-shadow 240ms ease;
 }
 .qty-controls button {
   min-width: 28px;
@@ -11,9 +12,22 @@
 .cart-page.container {
   background: linear-gradient(180deg, #06070a, #0a0b0f);
   padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+  border-radius: 14px;
+  box-shadow: 0 14px 40px rgba(2, 6, 23, 0.65);
   color: #e6eef8;
+  transform-origin: top center;
+  animation: cart-appear 320ms ease both;
+}
+
+@keyframes cart-appear {
+  from {
+    transform: translateY(-8px) scale(0.995);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
 }
 .cart-table {
   width: 100%;
@@ -28,13 +42,40 @@
   );
   border-radius: 12px;
   padding: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  transition: transform 240ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    box-shadow 240ms ease, opacity 240ms ease;
+  will-change: transform, opacity;
+}
+
+.cart-row:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 36px rgba(3, 10, 30, 0.55);
+}
+
+/* Animación de entrada escalonada para filas (utilidad) */
+.cart-row.enter {
+  animation: row-enter 380ms cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+
+@keyframes row-enter {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 .cart-thumb {
   width: 72px;
   height: 72px;
-  border-radius: 10px;
+  border-radius: 12px;
   object-fit: cover;
-  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.6);
+  box-shadow: 0 6px 22px rgba(2, 6, 23, 0.62);
 }
 .product-info {
   display: flex;
@@ -64,8 +105,8 @@
   font-weight: 700;
 }
 .btn-neon:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 26px rgba(0, 204, 122, 0.22);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 36px rgba(0, 204, 122, 0.22);
 }
 .btn-danger-soft {
   background: rgba(255, 0, 60, 0.08);
@@ -73,6 +114,10 @@
   border: 1px solid rgba(255, 0, 60, 0.12);
   padding: 6px 10px;
   border-radius: 8px;
+}
+
+.btn-danger-soft:active {
+  transform: translateY(1px) scale(0.995);
 }
 .coupon-row {
   margin-top: 18px;
@@ -93,6 +138,44 @@
   color: #e6eef8;
   border-radius: 10px;
   padding: 8px 12px;
+}
+
+/* Panel de Dirección y Comuna con diseño coherente */
+.shipping-panel {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.01),
+    rgba(255, 255, 255, 0.02)
+  );
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.shipping-label {
+  color: #c7d2ff;
+  font-size: 13px;
+  font-weight: 600;
+}
+.shipping-input {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  color: #e6eef8;
+  border-radius: 10px;
+  padding: 10px 12px;
+  outline: none;
+}
+.shipping-input::placeholder {
+  color: rgba(199, 210, 255, 0.36);
+}
+
+.shipping-hint {
+  color: #ffcfb3;
+  font-size: 13px;
+  margin-top: 8px;
+  line-height: 1.2;
 }
 .coupon-msg {
   color: #c7d2ff;
@@ -115,12 +198,13 @@
   color: #081018;
   border: none;
   padding: 10px 16px;
-  border-radius: 12px;
+  border-radius: 16px;
   font-weight: 800;
+  transition: transform 220ms ease, box-shadow 220ms ease;
 }
 .finalize-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(0, 255, 153, 0.12);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 18px 44px rgba(0, 255, 153, 0.14);
 }
 
 .test-product-note {
@@ -133,4 +217,24 @@
   justify-content: space-between;
   align-items: center;
   gap: 12px;
+}
+
+/* Pequeña utilidad para la animación de rebote de cantidad */
+.qty-bump {
+  animation: bump 420ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+@keyframes bump {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.14);
+  }
+  60% {
+    transform: scale(0.98);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

@@ -1,0 +1,125 @@
+.review-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.review-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.7);
+}
+.review-modal-panel {
+  position: relative;
+  width: 640px;
+  max-width: calc(100% - 40px);
+  background: linear-gradient(180deg, #071018, #0b1620);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  color: #e6eef8;
+}
+.review-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.review-close {
+  background: transparent;
+  border: none;
+  color: #c7d2ff;
+  font-size: 20px;
+  cursor: pointer;
+}
+.review-form textarea {
+  width: 100%;
+  background: #0b0f13;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  color: #e6eef8;
+  padding: 12px;
+  border-radius: 8px;
+  resize: vertical;
+}
+.ratings-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.rating-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.rating-label {
+  color: #c7d2ff;
+  font-weight: 800;
+}
+.stars {
+  display: flex;
+  gap: 6px;
+}
+.star {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.18);
+}
+.star.on {
+  color: #ffd166;
+  text-shadow: 0 2px 8px rgba(255, 209, 102, 0.12);
+}
+.global-rating {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.global-stars {
+  display: flex;
+  gap: 6px;
+}
+.gstar {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.18);
+}
+.gstar.on {
+  color: #ffd166;
+}
+.review-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+}
+.btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.btn.primary {
+  background: linear-gradient(90deg, #8fe9ff, #60d4ff);
+  color: #041018;
+  border: none;
+}
+.btn.secondary {
+  background: transparent;
+  color: #c7d2ff;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

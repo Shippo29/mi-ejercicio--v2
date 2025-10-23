@@ -1,64 +1,82 @@
-:root {
-  --footer-z: 1030;
-}
+/* Clean, minimal footer styles */
 
-.site-footer {
+.app-footer {
   width: 100%;
-  background-color: #070708; /* igual que el fondo principal */
-  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.03);
-  z-index: var(--footer-z);
+  background: linear-gradient(180deg, #050608 0%, #0b0d10 100%);
+  color: #cfdaf2;
+  padding: 18px 14px;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
 }
 
-/* Asegura que los enlaces sean visibles y tengan foco accesible */
-.site-footer a {
-  color: #9fd7ff; /* color claro con contraste en fondo oscuro */
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.contact-block {
+  flex: 1 1 260px;
+}
+
+.contact-title {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.contact-list {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.contact-list .label {
+  display: inline-block;
+  min-width: 110px;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 600;
+}
+
+.contact-link {
+  color: #9fd7ff;
   text-decoration: none;
 }
-
-.site-footer a:focus,
-.site-footer a:hover {
+.contact-link:hover,
+.contact-link:focus {
   text-decoration: underline;
 }
 
-/* fecha con negrita y color consistente */
-.footer-date {
-  color: #e6eef8;
+.brand-block {
+  flex: 0 0 220px;
+  text-align: right;
+}
+
+.brand-name {
   font-weight: 700;
+  color: #ffffff;
 }
 
-/* lista de contacto con viñetas y espaciado */
-.footer-left ul {
-  list-style: disc inside;
-  padding-left: 0.75rem;
-  margin: 0.35rem 0 0 0;
-}
-.footer-left li {
-  color: #e6eef8;
-  margin: 0.25rem 0;
+.copyright {
+  font-size: 13px;
+  margin-top: 6px;
+  color: rgba(207, 218, 242, 0.85);
 }
 
-.footer-right {
-  color: #e6eef8;
-}
-
-/* Asegura que el bloque derecho se pegue a la derecha en layout flex */
-.footer-right {
-  margin-left: auto; /* empuja a la derecha si hay espacio disponible */
-}
-
-/* En móviles (cuando se apila) centramos el contenido */
-@media (max-width: 575.98px) {
-  .footer-right {
-    margin-left: 0;
-    text-align: center;
-    width: 100%;
-    margin-top: 0.5rem;
+@media (max-width: 700px) {
+  .brand-block {
+    text-align: left;
+    flex-basis: 100%;
+    margin-top: 12px;
+  }
+  .footer-inner {
+    gap: 12px;
   }
 }
 
-/* En pantallas muy pequeñas apilar y centrar */
-@media (max-width: 575.98px) {
-  .site-footer .footer-inner {
-    text-align: center;
-  }
-}
+/* End of footer styles */

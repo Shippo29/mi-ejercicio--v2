@@ -1,7 +1,29 @@
 import React, { useState } from "react";
 import "./Contact.css";
+import logo from "../assets/LOGO.png";
 
-const WHATSAPP_BASE = "https://wa.me/56936113298"; // link to the user's number
+const WHATSAPP_BASE = "https://wa.me/56936113298";
+
+function TeamCard({ emoji, name, role, bio }) {
+  return (
+    <div className="team-card">
+      <div className="team-photo-wrap">
+        <span
+          className="team-emoji"
+          role="img"
+          aria-label={`Emoji para ${name}`}
+        >
+          {emoji}
+        </span>
+      </div>
+      <div className="team-info">
+        <div className="team-name">{name}</div>
+        <div className="team-role">{role}</div>
+        <div className="team-bio">{bio}</div>
+      </div>
+    </div>
+  );
+}
 
 export default function Contact() {
   const [reason, setReason] = useState("Consulta sobre producto");
@@ -12,37 +34,87 @@ export default function Contact() {
   }
 
   return (
-    <div className="contact container contact-animated">
-      <h2>Nosotros</h2>
+    <div className="contact container contact-animated contact-beauty">
+      <header className="contact-hero">
+        <div className="hero-text">
+          <h2>Level-Up Gamer</h2>
+          <p className="lead">
+            Somos Level-Up Gamer: una comunidad y tienda creada por gamers para
+            gamers. Nos mueve la pasión por los juegos, la calidad y el servicio
+            cercano.
+          </p>
+          <div className="hero-decor" aria-hidden="true">
+            <span className="line" />
+            <span className="dot" />
+          </div>
+        </div>
+        <div className="hero-ill">
+          <img src={logo} alt="Logo Level-Up Gamer" className="logo-hero" />
+        </div>
+      </header>
+
       <section className="about">
         <p>
-          <strong>Level-Up Gamer</strong> es una tienda online dedicada a
-          satisfacer las necesidades de los entusiastas de los videojuegos en
-          Chile. Lanzada hace dos años como respuesta a la creciente demanda
-          durante la pandemia, Level-Up Gamer ofrece una amplia gama de
-          productos para gamers, desde consolas y accesorios hasta computadores
-          y sillas especializadas. Aunque no cuenta con una ubicación física,
-          realiza despachos a todo el país.
+          <strong>Level-Up Gamer</strong> nace para acercar productos de calidad
+          y experiencias memorables a la comunidad gamer en Chile. Más que una
+          tienda, queremos ser un lugar donde encuentres recomendaciones,
+          soporte y la cercanía de un equipo que entiende lo que necesitas.
         </p>
       </section>
 
-      <section className="misvis">
-        <h4>Misión</h4>
-        <p>
-          Proporcionar productos de alta calidad para gamers en todo Chile,
-          ofreciendo una experiencia de compra única y personalizada, con un
-          enfoque en la satisfacción del cliente y el crecimiento de la
-          comunidad gamer.
-        </p>
-        <h4>Visión</h4>
-        <p>
-          Ser la tienda online líder en productos para gamers en Chile,
-          reconocida por su innovación, servicio al cliente excepcional, y un
-          programa de fidelización basado en gamificación.
-        </p>
+      <section className="misvis grid">
+        <div className="card">
+          <div className="card-header">
+            <span className="card-icon" role="img" aria-label="Misión">
+              🎯
+            </span>
+            <h4>Misión</h4>
+          </div>
+          <p>
+            Entregar productos cuidadosamente seleccionados y un soporte
+            amigable que permita que más personas disfruten de los videojuegos
+            con la mejor experiencia posible.
+          </p>
+        </div>
+        <div className="card">
+          <div className="card-header">
+            <span className="card-icon" role="img" aria-label="Visión">
+              🌟
+            </span>
+            <h4>Visión</h4>
+          </div>
+          <p>
+            Consolidarnos como la plataforma de referencia en Chile para gamers,
+            reconocida por su calidad, comunidad y servicio cercano.
+          </p>
+        </div>
       </section>
 
-      {/* Info de contacto movida al Footer */}
+      <section className="team">
+        <h3>Nuestro equipo</h3>
+        <p className="team-intro">Un grupo pequeño, apasionado y dedicado.</p>
+
+        <div className="team-grid">
+          <TeamCard
+            name="Cristian Briones"
+            role="Líder del Proyecto"
+            bio="Guía el desarrollo y la visión del proyecto, asegurando la mejor experiencia para nuestros usuarios."
+            emoji="⚡"
+          />
+          <TeamCard
+            name="Agustín Llanten"
+            role="Desarrollo & Producto"
+            bio="Enfocado en crear experiencias fluidas y funcionales para toda la comunidad gamer."
+            emoji="✨"
+          />
+          <TeamCard
+            name="Gino Trujillo"
+            role="Innovación & Diseño"
+            bio="Aporta creatividad y visión innovadora para mejorar constantemente la plataforma."
+            emoji="🚀"
+          />
+        </div>
+      </section>
 
       <section className="whatsapp">
         <h4>Atención rápida por WhatsApp</h4>

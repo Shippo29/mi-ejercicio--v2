@@ -36,11 +36,7 @@ export default function HomePage() {
             <div key={p.id} className="featured-item">
               <ProductCard
                 product={{
-                  id: p.id,
-                  name: p.nombre,
-                  price: p.precio,
-                  description: p.descripcion,
-                  image: p.imagen,
+                  ...p,
                   descuento: 0.15, // forzar 15% en destacados
                 }}
               />
@@ -69,10 +65,11 @@ export default function HomePage() {
       </section>
 
       <section className="payments">
-        <h4>Formas de pago seguras</h4>
+        <h4>¡Paga como prefieras! 🔒</h4>
         <p>
-          Pagos rápidos y seguros con tarjetas, MercadoPago y transferencia
-          bancaria.
+          Elige tu método favorito: tarjetas, MercadoPago o transferencia. Todas
+          tus compras están 100% protegidas y procesadas al instante. ¡Compra
+          ahora, juega después!
         </p>
       </section>
     </div>

@@ -17,6 +17,7 @@ export default function CartClean() {
 
   const [couponInput, setCouponInput] = useState("");
   const [couponMessage, setCouponMessage] = useState(null);
+  const [shipping, setShipping] = useState({ direccion: "", comuna: "" });
 
   const hasExclusiveDiscount = carrito.some(
     (p) => p && p.descuento && p.descuento > 0
@@ -197,7 +198,32 @@ export default function CartClean() {
               <small style={{ color: "#7ef0b4" }}>(Descuento aplicado)</small>
             )}
           </h4>
-          <button className="finalize-btn" onClick={finalizarCompra}>
+
+          <div style={{ marginTop: 10, marginBottom: 8 }}>
+            <input
+              className="form-control"
+              placeholder="Dirección"
+              value={shipping.direccion}
+              onChange={(e) =>
+                setShipping((s) => ({ ...s, direccion: e.target.value }))
+              }
+            />
+            <input
+              className="form-control"
+              placeholder="Comuna"
+              style={{ marginTop: 8 }}
+              value={shipping.comuna}
+              onChange={(e) =>
+                setShipping((s) => ({ ...s, comuna: e.target.value }))
+              }
+            />
+          </div>
+
+          <button
+            className="finalize-btn"
+            onClick={() => finalizarCompra(shipping)}
+            disabled={!shipping.direccion || !shipping.comuna}
+          >
             Finalizar compra
           </button>
         </div>

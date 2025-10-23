@@ -12,7 +12,6 @@ export function showToast(message) {
     } else {
       body.textContent = message;
     }
-    // Use bootstrap toast if available
     if (window.bootstrap && window.bootstrap.Toast) {
       const t = new window.bootstrap.Toast(el);
       t.show();
@@ -69,7 +68,6 @@ export function injectWhatsAppButton() {
   }
 }
 
-// expose for legacy scripts
 window.showToast = showToast;
 window.animateCartBadge = animateCartBadge;
 window.openWhatsApp = openWhatsApp;

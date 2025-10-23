@@ -16,7 +16,12 @@ export default function Cart() {
   } = useCart();
 
   const [couponText, setCouponText] = useState("");
-  const [couponMsg, setCouponMsg] = useState(null); 
+  const [couponMsg, setCouponMsg] = useState(null);
+  const [shipping, setShipping] = useState({ direccion: "", comuna: "" });
+  // Validación mínima para permitir finalizar compra
+  const isShippingValid =
+    String(shipping.direccion || "").trim().length >= 5 &&
+    String(shipping.comuna || "").trim().length > 0;
 
   // Filtrar productos visibles (ocultar id = 101)
   const visibleProducts = useMemo(
@@ -202,7 +207,49 @@ export default function Cart() {
           </div>
         </div>
         <div>
-          <button className="finalize-btn" onClick={finalizarCompra}>
+          <div className="shipping-panel">
+            {/* Sección Dirección/Comuna: diseño coherente con la estética del carrito */}
+            <label className="shipping-label">Dirección</label>
+            <input
+              className="form-control shipping-input"
+              placeholder="Ej. Avenida Siempre Viva 742"
+              value={shipping.direccion}
+              onChange={(e) =>
+                setShipping((s) => ({ ...s, direccion: e.target.value }))
+              }
+            />
+            <label className="shipping-label" style={{ marginTop: 8 }}>
+              Comuna
+            </label>
+            <input
+              className="form-control shipping-input"
+              placeholder="Ej. Las Condes"
+              value={shipping.comuna}
+              onChange={(e) =>
+                setShipping((s) => ({ ...s, comuna: e.target.value }))
+              }
+            />
+            {!isShippingValid && (
+              <div className="shipping-hint">
+                <div>La dirección debe tener al menos 5 caracteres.</div>
+                <div>La comuna es obligatoria.</div>
+              </div>
+            )}
+          </div>
+          <button
+            className="finalize-btn"
+            onClick={() => {
+              // Ejecutar la finalización (persistencia de ordenes) y limpiar campos
+              finalizarCompra(shipping);
+              setShipping({ direccion: "", comuna: "" });
+            }}
+            disabled={!isShippingValid}
+            title={
+              !isShippingValid
+                ? "Dirección mínima 5 caracteres y comuna requerida"
+                : "Finalizar compra"
+            }
+          >
             Finalizar compra
           </button>
         </div>
