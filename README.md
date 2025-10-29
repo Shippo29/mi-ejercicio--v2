@@ -78,3 +78,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### `cd mi-ejercicio--v2" npm test -- --watchAll=false --testPathPattern=Contact.logic.spec.js --verbose` es para ejecutar los test 
