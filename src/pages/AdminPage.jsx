@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import productosData from "../data/productos";
 import { formatCLP } from "../utils/format";
 import {
@@ -94,7 +95,7 @@ export default function AdminPage() {
     setUsers(all);
     if (current && current.id === userId) {
       localStorage.removeItem("currentUser");
-      window.location.hash = "home";
+      navigate("/home");
     }
     if (typeof window.showToast === "function")
       window.showToast("Usuario eliminado");
@@ -214,35 +215,9 @@ export default function AdminPage() {
   // Modal de confirmación para salir
   const [exitModalOpen, setExitModalOpen] = useState(false);
   const [pendingNavigation, setPendingNavigation] = useState(null);
-  const prevHashRef = useRef(window.location.hash || "");
-  const ignoreHashRef = useRef(false);
   const originalLogoutRef = useRef(null);
 
-  useEffect(() => {
-    originalLogoutRef.current = window.logout;
-    window.logout = function () {
-      setPendingNavigation({ type: "logout" });
-      setExitModalOpen(true);
-    };
-    function onHashChange() {
-      const prev = prevHashRef.current || "";
-      const current = window.location.hash || "";
-      if (!ignoreHashRef.current && prev === "#admin" && current !== "#admin") {
-        const target = current;
-        ignoreHashRef.current = true;
-        window.location.hash = prev;
-        setPendingNavigation({ type: "hash", value: target });
-        setExitModalOpen(true);
-        setTimeout(() => (ignoreHashRef.current = false), 50);
-      }
-      prevHashRef.current = window.location.hash || "";
-    }
-    window.addEventListener("hashchange", onHashChange);
-    return () => {
-      if (originalLogoutRef.current) window.logout = originalLogoutRef.current;
-      window.removeEventListener("hashchange", onHashChange);
-    };
-  }, []);
+  const navigate = useNavigate();
 
   function confirmExit(yes) {
     setExitModalOpen(false);
@@ -252,17 +227,18 @@ export default function AdminPage() {
     }
     if (!pendingNavigation) {
       if (originalLogoutRef.current) originalLogoutRef.current();
-      else window.location.hash = "home";
+      else navigate("/home");
       return;
     }
     if (pendingNavigation.type === "logout") {
       if (originalLogoutRef.current) originalLogoutRef.current();
-      else window.location.hash = "home";
+      else navigate("/home");
       return;
     }
     if (pendingNavigation.type === "hash") {
-      const target = pendingNavigation.value || "#home";
-      window.location.hash = target;
+      const target =
+        (pendingNavigation.value || "#home").replace(/^#/, "") || "home";
+      navigate(`/${target}`);
       setPendingNavigation(null);
       return;
     }

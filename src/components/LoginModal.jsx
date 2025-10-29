@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./ProductModal.css";
 import { getUsers, saveUsers, setCurrentUser } from "../utils/users";
 
@@ -7,6 +8,7 @@ export default function LoginModal({ visible, onClose }) {
   const [password, setPassword] = useState("");
   const [showRegister, setShowRegister] = useState(false);
   const [nombre, setNombre] = useState("");
+  const navigate = useNavigate();
 
   if (!visible) return null;
 
@@ -45,7 +47,7 @@ export default function LoginModal({ visible, onClose }) {
         saveUsers(all);
       }
       setCurrentUser(user);
-      window.location.hash = "admin";
+      navigate("/admin");
       onClose && onClose();
       return;
     }
@@ -54,7 +56,7 @@ export default function LoginModal({ visible, onClose }) {
     setCurrentUser(user);
     if ((mail || "") === "gin.trujillo@duocuc.cl") {
       // redirigir a admin si es ese correo
-      window.location.hash = "admin";
+      navigate("/admin");
     }
     safeToast("Sesión iniciada");
     onClose && onClose();

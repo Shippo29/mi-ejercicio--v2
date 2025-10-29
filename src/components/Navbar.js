@@ -5,6 +5,7 @@ import { useCart } from "../context/CartContext";
 import logo from "../assets/LOGO.png";
 import SearchPage from "../pages/SearchPage";
 import { getCurrentUser } from "../utils/users";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const { actualizarContador } = useCart();
@@ -14,6 +15,8 @@ export default function Navbar() {
   const [currentUser, setCurrentUserState] = useState(() => getCurrentUser());
   const containerRef = useRef(null);
 
+  const navigate = useNavigate();
+
   // La lista completa de regiones se mantiene en otro lugar si es necesario.
   const [location] = useState("Santiago");
 
@@ -21,8 +24,8 @@ export default function Navbar() {
     e && e.preventDefault();
     // Notificar búsqueda globalmente
     window.dispatchEvent(new CustomEvent("globalSearch", { detail: search }));
-    // navegar a home
-    window.location.hash = "home";
+    // navegar a home usando react-router
+    navigate("/home");
     setPanelVisible(true);
   };
 
@@ -57,15 +60,15 @@ export default function Navbar() {
       localStorage.removeItem("currentUser");
     } catch (e) {}
     window.dispatchEvent(new CustomEvent("userChanged", { detail: null }));
-    window.location.hash = "home";
+    navigate("/home");
   }
 
   return (
     <nav className="nav" ref={containerRef}>
       <div className="nav-left">
-        <a href="#home" className="logo-link">
+        <Link to="/home" className="logo-link">
           <img src={logo} alt="Logo de la empresa" className="navbar-logo" />
-        </a>
+        </Link>
         <div className="brand-wrap">
           <h1 className="brand">Level-Up Gamer</h1>
         </div>
@@ -104,18 +107,18 @@ export default function Navbar() {
       <div className="nav-right">
         <ul className="nav-links">
           <li>
-            <a href="#home">Inicio</a>
+            <Link to="/home">Inicio</Link>
           </li>
           <li>
-            <a href="#ofertas">Ofertas</a>
+            <Link to="/ofertas">Ofertas</Link>
           </li>
           <li>
-            <a href="#contacto">Nosotros</a>
+            <Link to="/contacto">Nosotros</Link>
           </li>
         </ul>
         {currentUser ? (
           <>
-            <a href="#cart">
+            <Link to="/cart">
               <button
                 className="cart-btn"
                 aria-label={`Abrir carrito, ${count} items`}
@@ -129,7 +132,7 @@ export default function Navbar() {
                   {count}
                 </span>
               </button>
-            </a>
+            </Link>
             <div className="nav-user">{currentUser.nombre}</div>
             <button className="btn logout-btn" onClick={handleLogout}>
               Cerrar sesión
@@ -139,11 +142,11 @@ export default function Navbar() {
           <>
             <button
               className="login-global-btn btn btn-sm"
-              onClick={() => (window.location.hash = "login")}
+              onClick={() => navigate("/login")}
             >
               Iniciar sesión
             </button>
-            <a href="#cart">
+            <Link to="/cart">
               <button
                 className="cart-btn"
                 aria-label={`Abrir carrito, ${count} items`}
@@ -157,7 +160,7 @@ export default function Navbar() {
                   {count}
                 </span>
               </button>
-            </a>
+            </Link>
           </>
         )}
       </div>

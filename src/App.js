@@ -10,22 +10,11 @@ import AdminPage from "./pages/AdminPage";
 import Offers from "./pages/Offers";
 import Contact from "./pages/Contact";
 import LoginPage from "./pages/LoginPage";
-import { useState, useEffect } from "react";
 import Footer from "./components/Footer.jsx";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
-  const [route, setRoute] = useState(
-    window.location.hash.replace("#", "") || "home"
-  );
-  useEffect(() => {
-    const onHash = () =>
-      setRoute(window.location.hash.replace("#", "") || "home");
-    window.addEventListener("hashchange", onHash);
-    return () => window.removeEventListener("hashchange", onHash);
-  }, []);
-
   // La búsqueda global se maneja desde Navbar mediante SearchPanel
-
   return (
     <div className="App">
       <Navbar />
@@ -44,13 +33,18 @@ function App() {
         pauseOnHover
         theme="dark"
       />
-      {route === "home" && <HomePage />}
-      {/* productos route removed */}
-      {route === "cart" && <Cart />}
-      {route === "admin" && <AdminPage />}
-      {route === "ofertas" && <Offers />}
-      {route === "login" && <LoginPage />}
-      {route === "contacto" && <Contact />}
+
+      <Routes>
+        <Route path="/" element={<Navigate to="/home" replace />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/ofertas" element={<Offers />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/contacto" element={<Contact />} />
+        <Route path="*" element={<Navigate to="/home" replace />} />
+      </Routes>
+
       <Footer />
     </div>
   );

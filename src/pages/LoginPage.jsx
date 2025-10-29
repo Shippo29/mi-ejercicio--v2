@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
 import {
   getUsers,
@@ -13,6 +14,7 @@ export default function LoginPage() {
   const [showRegister, setShowRegister] = useState(false);
   const [nombre, setNombre] = useState("");
   const [dob, setDob] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     try {
@@ -54,11 +56,11 @@ export default function LoginPage() {
         saveUsers(all);
       }
       setCurrentUser(user);
-      window.location.hash = "admin";
+      navigate("/admin");
       return;
     }
     setCurrentUser(user);
-    if (mail === "gin.trujillo@duocuc.cl") window.location.hash = "admin";
+    if (mail === "gin.trujillo@duocuc.cl") navigate("/admin");
     safeToast("Sesión iniciada");
   }
 
@@ -105,7 +107,7 @@ export default function LoginPage() {
       // notificar a la UI React
       window.dispatchEvent(new CustomEvent("userChanged", { detail: user }));
       safeToast("Registro exitoso. Sesión iniciada.");
-      window.location.hash = "home";
+      navigate("/home");
       try {
         localStorage.removeItem("prefillEmail");
       } catch (e) {}
@@ -116,7 +118,7 @@ export default function LoginPage() {
       localStorage.setItem("prefillEmail", mail);
     } catch (e) {}
     safeToast("Registro exitoso");
-    window.location.hash = "home";
+    navigate("/home");
   }
 
   function handleAdminPrompt() {
@@ -153,7 +155,7 @@ export default function LoginPage() {
     }
     setCurrentUser(user);
     window.dispatchEvent(new CustomEvent("userChanged", { detail: user }));
-    window.location.hash = "admin";
+    navigate("/admin");
   }
 
   return (
